@@ -1,25 +1,32 @@
 <script lang="ts">
     import icon from '#lib/assets/icon.svg';
     import { routes } from '#routes';
-    import { goto } from '$app/navigation';
+    import { afterNavigate, goto } from '$app/navigation';
     import { links } from '#lib';
     import GitHubIcon from '#lib/custom-icons/GitHubIcon.svelte';
+    import { derived } from 'svelte/store';
 
     const MIN_WIDTH = 6;
     const MAX_WIDTH = 64;
     const HIDING_THRESHOLD = 30;
     const ANIMATION_DELAY_MS = 2;
+    const TAILWIND_SIZE_MD = 768;
 
+    let pageWidth = $state(0);
+    let isMobile = $derived(pageWidth <= TAILWIND_SIZE_MD);
     let navWidth = $state(MAX_WIDTH);
     let navStyles = $derived('width: ' + navWidth + 'rem;');
     let oldScrollY = $state(0);
     let isOpen = $state(true);
     let isChanging = $state(false);
+    let isFullyClosed = $state(false);
 
     function updateScroll() {
         let newScrollY = window.scrollY;
 
-        if (newScrollY > oldScrollY) {
+        if (isMobile) {
+            close();
+        } else if (newScrollY > oldScrollY) {
             close();
         } else if (newScrollY < oldScrollY) {
             open();
@@ -30,6 +37,8 @@
     function iconPressed() {
         if (!isOpen) {
             open();
+        } else if (isMobile) {
+            close();
         } else {
             goto(routes.home());
         }
@@ -39,6 +48,7 @@
         if (isChanging) return;
         isChanging = true;
         isOpen = true;
+        isFullyClosed = false;
         while (navWidth < MAX_WIDTH && isOpen) {
             await sleep();
             navWidth++;
@@ -48,6 +58,7 @@
 
     async function close() {
         if (isChanging) return;
+        isFullyClosed = false;
         isChanging = true;
         isOpen = false;
         while (navWidth > MIN_WIDTH && !isOpen) {
@@ -55,47 +66,69 @@
             navWidth--;
         }
         isChanging = false;
+        isFullyClosed = true;
     }
 
     async function sleep(): Promise<void> {
         return new Promise((resolve) => setTimeout(resolve, ANIMATION_DELAY_MS));
     }
+
+    afterNavigate(() => {
+        if (isMobile) {
+            setTimeout(() => {
+                close();
+            }, 300);
+        }
+    });
 </script>
 
-<svelte:window on:scroll={updateScroll} />
-
-<nav class="fixed top-4 left-0 w-full z-100 px-4 flex justify-center">
+<svelte:window on:scroll={updateScroll} bind:outerWidth={pageWidth} />
+<nav
+    class="fixed md:top-4 md:left-0 right-0 md:bottom-auto bottom-12 w-full z-100 px-4 flex justify-end md:justify-center"
+>
     <div
-        class="overflow-x-hidden shadow shadow-base-300 bg-base-200 rounded-box p-4 flex flex-row justify-between items-center"
+        class="overflow-x-hidden space-y-2 md:space-y-0 shadow shadow-base-300 bg-base-200 rounded-box p-4 flex flex-col-reverse md:flex-row md:justify-between items-center"
         style={navStyles}
     >
-        <button onclick={iconPressed} class="flex select-none cursor-pointer flex-row space-x-6 items-center">
-            <img src={icon} alt="Rubik's cube" class="h-16" />
-            {#if navWidth > HIDING_THRESHOLD}
-                <span class="text-xl">Nijasc</span>
+        <div class="w-full md:w-fit flex flex-row p-0 m-0">
+            {#if isMobile && !isFullyClosed}
+                <div class="flex md:hidden w-full"></div>
             {/if}
-        </button>
+            <button
+                onclick={iconPressed}
+                class="flex select-none cursor-pointer w-fit flex-row-reverse md:flex-row space-x-6 items-center"
+            >
+                <img src={icon} alt="Rubik's cube" class="h-16 w-16 min-w-16" />
+                {#if navWidth > HIDING_THRESHOLD && !isMobile}
+                    <span class="text-xl">Nijasc</span>
+                {/if}
+            </button>
+        </div>
         {#if navWidth > HIDING_THRESHOLD}
-            <ul class="flex flex-row space-x-8">
+            <ul class="flex flex-col space-y-2 md:space-y-0 md:flex-row md:space-x-8 w-full md:w-fit text-right">
                 <li><a class="nav-link" href={routes.blog()}>Blog</a></li>
                 <li><a class="nav-link" href={routes.projects()}>Projects</a></li>
                 <li><a class="nav-link" href={routes.discussion()}>Discussion</a></li>
             </ul>
-            <div class="flex flex-row space-x-2 items-center">
-                <a target="_blank" class="btn btn-neutral" href={links.githubRepo}>
-                    <GitHubIcon />
-                </a>
-                <a class="btn btn-primary" href={routes.login()}>Login</a>
-            </div>
+            <ul class="flex flex-col space-y-2 md:space-y-0 md:flex-row md:space-x-2 items-center w-full md:w-fit">
+                <li class="w-full md:w-fit">
+                    <a target="_blank" class="btn hidden md:flex btn-neutral w-full md:w-fit" href={links.githubRepo}>
+                        <GitHubIcon />
+                    </a>
+                </li>
+                <li class="w-full md:w-fit">
+                    <a class="btn btn-primary w-full md:w-fit" href={routes.login()}>Login</a>
+                </li>
+            </ul>
         {/if}
     </div>
 </nav>
 
-<style>
+<style lang="postcss">
     @reference "../ktor-svelte/app.css";
 
     .nav-link {
-        @apply bg-clip-text bg-base-content text-transparent;
+        @apply bg-clip-text bg-base-content text-transparent w-full md:w-fit;
     }
 
     .nav-link:hover {
