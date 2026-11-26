@@ -45,9 +45,8 @@ svelte {
             typography()
         }
         daisyUi {
-            themes(DaisyTheme.ShadcnLight, DaisyTheme.ShadcnDark)
+            themes(DaisyTheme.ShadcnLight)
             defaultTheme(DaisyTheme.ShadcnLight)
-            prefersDark(DaisyTheme.ShadcnDark)
         }
         lucide()
         i18n {
