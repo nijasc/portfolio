@@ -57,6 +57,7 @@ svelte {
             defaultLocale = "en"
             strategy = LocaleStrategy.Cookie
         }
+        routes()
     }
     utils {
         flyway()
