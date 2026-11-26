@@ -1,9 +1,6 @@
 <script lang="ts">
     import icon from "#lib/assets/icon.svg"
     import {routes} from "#routes";
-    import Icon from "#icon";
-    import {icons} from "#lib/ktor-svelte/icons.ts";
-
 </script>
 
 <nav class="fixed top-4 left-0 w-full">
