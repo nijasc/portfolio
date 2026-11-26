@@ -10,9 +10,8 @@
     const HIDING_THRESHOLD = 30;
     const ANIMATION_DELAY_MS = 2;
 
-    let navStyles = $derived('width: ' + navWidth + 'rem;');
-
     let navWidth = $state(MAX_WIDTH);
+    let navStyles = $derived('width: ' + navWidth + 'rem;');
     let oldScrollY = $state(0);
     let isOpen = $state(true);
     let isChanging = $state(false);
