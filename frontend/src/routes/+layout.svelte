@@ -1,6 +1,6 @@
 <script lang="ts">
     import '#lib/ktor-svelte/app.css';
-    import Navbar from "#lib/components/Navbar.svelte";
+    import Navbar from '#lib/components/Navbar.svelte';
 
     let { children } = $props();
 </script>
