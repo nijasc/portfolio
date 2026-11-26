@@ -2128,5 +2128,4 @@ export type LucideIconName =
     | 'ZoomOut';
 
 export const icons: Partial<Record<LucideIconName, () => Promise<{ default: Component<any> }>>> = {
-    Rocket: () => import('@lucide/svelte/icons/rocket'),
 };
