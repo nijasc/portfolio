@@ -3,7 +3,7 @@
     import {routes} from "#routes";
 </script>
 
-<nav class="fixed top-4 left-0 w-full">
+<nav class="fixed top-4 left-0 w-full z-100">
     <div class="mx-4 bg-base-200 rounded-box p-4 flex flex-row justify-between items-center">
         <a href={routes.home()} class="flex flex-row space-x-4 items-center">
             <img src={icon} alt="Rubik's cube" class="h-16">
@@ -16,7 +16,7 @@
             <li><a class="nav-link" href={routes.discussion()}>Discussion</a></li>
         </ul>
         <div>
-            <a class="btn btn-primary">Login</a>
+            <a class="btn btn-primary" href={routes.login()}>Login</a>
         </div>
     </div>
 </nav>
