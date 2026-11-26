@@ -28,11 +28,26 @@ They are generated. An edit is overwritten, and `./gradlew check` fails when the
 
 Format them with `formatNumber`, `formatMoney`, `formatDate`, `formatDateTime` and `formatTime` from `#format`, and with `call.formats` in Kotlin. Both print the same text for the visitor's language. Do not call `toLocaleString` or `Intl` for these.
 
+## Pages and links
+
+Link to pages through `import { routes } from '#routes'`, such as `href={routes.home()}`. Do not write page paths as strings.
+In Kotlin, redirects use the generated `FrontendRoutes` object. After adding, moving or deleting a page, run
+`./gradlew svelteSync`. To rename one, use `./gradlew svelteRename --page <old> --to <new>`.
+
+| Name | Page |
+|---|---|
+| `routes.home` | `/` |
+| `routes.account` | `/account` |
+| `routes.blog` | `/blog` |
+| `routes.discussion` | `/discussion` |
+| `routes.login` | `/login` |
+| `routes.projects` | `/projects` |
+
 ## Libraries that are set up
 
 - Styling is Tailwind with DaisyUI. Themes are , set in Gradle. Switch with `setTheme` from `#theme`. Use DaisyUI classes and theme colors, not fixed colors.
 - Icons: `import Icon from '#icon'`, then `<Icon name="Rocket" />`. Names are type checked. After using a new icon, run `./gradlew svelteSync`.
-- Texts: add the key to every file in `messages/` (`en.json`, `de.json`), run `./gradlew svelteSync`, then use `m.key()` from `#i18n`. Wrap page links in `localizeHref`. Do not put user-visible text into components directly.
+- Texts: add the key to every file in `messages/` (`en.json`, `de.json`), run `./gradlew svelteSync`, then use `m.key()` from `#i18n`. Do not put user-visible text into components directly.
 
 ## Commands
 
