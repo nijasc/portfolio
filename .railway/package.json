@@ -1,0 +1,8 @@
+{
+  "name": "nijasc-portfolio-infrastructure",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "railway": "3.18.0"
+  }
+}

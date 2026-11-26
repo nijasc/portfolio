@@ -1,0 +1,14 @@
+CREATE TABLE visits (
+    id SERIAL PRIMARY KEY,
+    at TIMESTAMP NOT NULL
+);
+
+CREATE TABLE users (
+    username VARCHAR(64) PRIMARY KEY,
+    password_hash VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE blog_blog (
+    id VARCHAR(36) PRIMARY KEY,
+    name VARCHAR(200) NOT NULL
+);

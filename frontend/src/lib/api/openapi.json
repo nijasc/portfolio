@@ -1,0 +1,304 @@
+{
+    "openapi": "3.1.1",
+    "info": {
+        "title": "API",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/auth/login": {
+            "post": {
+                "summary": "",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Credentials"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "401": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Problem"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CurrentUser"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/logout": {
+            "post": {
+                "summary": "",
+                "responses": {
+                    "204": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/api/auth/me": {
+            "get": {
+                "summary": "",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CurrentUser"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "session": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/register": {
+            "post": {
+                "summary": "",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Credentials"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "409": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Problem"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CurrentUser"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/blog": {
+            "post": {
+                "summary": "",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NewBlog"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BlogView"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/BlogView"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/hello": {
+            "get": {
+                "summary": "",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Greeting"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/visits": {
+            "post": {
+                "summary": "",
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/VisitCount"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Greeting": {
+                "type": "object",
+                "title": "Greeting",
+                "required": [
+                    "message"
+                ],
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            },
+            "VisitCount": {
+                "type": "object",
+                "title": "VisitCount",
+                "required": [
+                    "visits",
+                    "at"
+                ],
+                "properties": {
+                    "visits": {
+                        "type": "integer"
+                    },
+                    "at": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            },
+            "Credentials": {
+                "type": "object",
+                "title": "Credentials",
+                "required": [
+                    "username",
+                    "password"
+                ],
+                "properties": {
+                    "username": {
+                        "type": "string",
+                        "maxLength": 64
+                    },
+                    "password": {
+                        "type": "string",
+                        "maxLength": 200,
+                        "minLength": 12
+                    }
+                }
+            },
+            "Problem": {
+                "type": "object",
+                "title": "Problem",
+                "required": [
+                    "message"
+                ],
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            },
+            "CurrentUser": {
+                "type": "object",
+                "title": "CurrentUser",
+                "required": [
+                    "username"
+                ],
+                "properties": {
+                    "username": {
+                        "type": "string"
+                    }
+                }
+            },
+            "BlogView": {
+                "type": "object",
+                "title": "BlogView",
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "NewBlog": {
+                "type": "object",
+                "title": "NewBlog",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 200
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "session": {
+                "name": "session",
+                "in": "cookie",
+                "description": "Session-based Authentication",
+                "type": "apiKey"
+            }
+        }
+    }
+}

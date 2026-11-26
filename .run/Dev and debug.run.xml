@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Dev and debug" type="CompoundRunConfigurationType">
+    <toRun name="Dev" type="GradleRunConfiguration" />
+    <toRun name="Debug app" type="Remote" />
+    <method v="2" />
+  </configuration>
+</component>
