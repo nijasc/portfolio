@@ -40,6 +40,9 @@ tasks.shadowJar {
 }
 
 svelte {
+    dev {
+        openBrowser = false
+    }
     libraries {
         tailwind {
             typography()
