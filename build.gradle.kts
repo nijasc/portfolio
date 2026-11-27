@@ -50,8 +50,9 @@ svelte {
             typography()
         }
         daisyUi {
-            themes(DaisyTheme.ShadcnLight)
+            themes(DaisyTheme.ShadcnLight, DaisyTheme.ShadcnDark, DaisyTheme.Winter, DaisyTheme.Forest)
             defaultTheme(DaisyTheme.ShadcnLight)
+            prefersDark(DaisyTheme.ShadcnDark)
         }
         lucide {
             allIcons()
