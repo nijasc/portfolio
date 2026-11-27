@@ -1,8 +1,8 @@
 <script lang="ts">
     import icon from '#lib/assets/icon.svg';
-    import {routes} from '#routes';
-    import {afterNavigate, goto} from '$app/navigation';
-    import {links} from '#lib';
+    import { routes } from '#routes';
+    import { afterNavigate, goto } from '$app/navigation';
+    import { links } from '#lib';
     import GitHubIcon from '#lib/custom-icons/GitHubIcon.svelte';
 
     const MIN_WIDTH = 6;
@@ -14,12 +14,12 @@
     const ANIMATION_WIDTH_DELAY = 8;
     const TAILWIND_SIZE_MD = 768;
 
-    let navBar: HTMLDivElement | null = $state(null)
-    let navHeight = $state(MIN_HEIGHT)
+    let navBar: HTMLDivElement | null = $state(null);
+    let navHeight = $state(MIN_HEIGHT);
     let pageWidth = $state(0);
     let isMobile = $derived(pageWidth <= TAILWIND_SIZE_MD);
     let navWidth = $state(MAX_WIDTH);
-    let navStyles = $derived(('width: ' + navWidth + 'rem; height: ' + navHeight + 'rem;'));
+    let navStyles = $derived('width: ' + navWidth + 'rem; height: ' + navHeight + 'rem;');
     let oldScrollY = $state(0);
     let isOpen = $state(true);
     let isChanging = $state(false);
@@ -54,8 +54,8 @@
         if (isChanging) return;
         isChanging = true;
         isOpen = true;
-        expandWidth()
-        if (withHeight) expandHeight()
+        expandWidth();
+        if (withHeight) expandHeight();
         isChanging = false;
     }
 
@@ -78,8 +78,8 @@
         if (isChanging) return;
         isChanging = true;
         isOpen = false;
-        shrinkWidth()
-        shrinkHeight()
+        shrinkWidth();
+        shrinkHeight();
         isChanging = false;
     }
 
@@ -105,13 +105,13 @@
     }
 
     async function onResize() {
-        let windowSize = window.outerWidth
-        let mobile = windowSize <= TAILWIND_SIZE_MD
+        let windowSize = window.outerWidth;
+        let mobile = windowSize <= TAILWIND_SIZE_MD;
         if (mobile) {
-            open(true)
-            initMobileSizes()
+            open(true);
+            initMobileSizes();
         } else {
-            open()
+            open();
         }
     }
 
@@ -123,17 +123,17 @@
 
     afterNavigate(() => {
         if (isMobile) {
-            initMobileSizes()
+            initMobileSizes();
         }
     });
 
     $effect(() => {
-        if (navWidth < MIN_WIDTH) navWidth = MIN_WIDTH
-        if (navHeight < MIN_HEIGHT) navHeight = MIN_HEIGHT
-    })
+        if (navWidth < MIN_WIDTH) navWidth = MIN_WIDTH;
+        if (navHeight < MIN_HEIGHT) navHeight = MIN_HEIGHT;
+    });
 </script>
 
-<svelte:window on:resize={onResize} on:scroll={updateScroll} bind:outerWidth={pageWidth}/>
+<svelte:window on:resize={onResize} on:scroll={updateScroll} bind:outerWidth={pageWidth} />
 <nav
     class="fixed md:top-4 md:left-0 right-0 md:bottom-auto bottom-12 w-full z-100 px-4 flex justify-end md:justify-center"
 >
@@ -150,7 +150,7 @@
                 onclick={iconPressed}
                 class="flex select-none cursor-pointer w-fit flex-row-reverse md:flex-row space-x-6 items-center"
             >
-                <img src={icon} alt="Rubik's cube" class="h-16 w-16 min-w-16"/>
+                <img src={icon} alt="Rubik's cube" class="h-16 w-16 min-w-16" />
                 {#if navWidth > HIDING_THRESHOLD && !isMobile}
                     <span class="text-xl">Nijasc</span>
                 {/if}
@@ -165,7 +165,7 @@
             <ul class="flex flex-col space-y-2 md:space-y-0 md:flex-row md:space-x-2 items-center w-full md:w-fit">
                 <li class="w-full md:w-fit">
                     <a target="_blank" class="btn hidden md:flex btn-neutral w-full md:w-fit" href={links.githubRepo}>
-                        <GitHubIcon/>
+                        <GitHubIcon />
                     </a>
                 </li>
                 <li class="w-full md:w-fit">
