@@ -8,7 +8,7 @@
 
     const MIN_WIDTH = 6;
     const MIN_HEIGHT = 6;
-    const MAX_HEIGHT = 15;
+    const MAX_HEIGHT = 18.25;
     const MAX_WIDTH_MOBILE = 22;
     const MAX_WIDTH_DESKTOP = 64;
     const ANIMATION_DURATION = 300;
@@ -148,7 +148,14 @@
     >
         <div class="w-full md:w-fit flex flex-row p-0 m-0">
             {#if isMobile && !isWidthCollapsed}
-                <div class="flex md:hidden w-full"></div>
+                <div class="flex flex-row items-center md:hidden w-full">
+                    {#if navWidth > hidingThreshold + hidingThreshold / 2}
+                        <a target="_blank" class="btn md:hidden btn-neutral w-fit" href={links.githubRepo}>
+                            <GitHubIcon />
+                        </a>
+                        <span class="text-base-content/50 text-sm w-full text-center">Nijasc &copy; 2026</span>
+                    {/if}
+                </div>
             {/if}
             <button
                 onclick={iconPressed}
@@ -163,13 +170,13 @@
         {#if navWidth > hidingThreshold}
             <ul
                 class={[
-                    'flex flex-col space-y-2 md:space-y-0 md:flex-row md:space-x-8 w-full md:w-fit text-right',
+                    'flex flex-col space-y-2 mt-2 md:mt-0 md:space-y-0 md:flex-row md:space-x-8 w-full md:w-fit text-right',
                     !mounted && 'max-md:hidden'
                 ]}
             >
-                <li><a class="nav-link" href={routes.blog()}>Blog</a></li>
-                <li><a class="nav-link" href={routes.projects()}>Projects</a></li>
-                <li><a class="nav-link" href={routes.discussion()}>Discussion</a></li>
+                <li class="nav-link"><a href={routes.blog()}>Blog</a></li>
+                <li class="nav-link"><a href={routes.projects()}>Projects</a></li>
+                <li class="nav-link"><a href={routes.discussion()}>Discussion</a></li>
             </ul>
             <ul
                 class={[
@@ -183,7 +190,9 @@
                     </a>
                 </li>
                 <li class="w-full md:w-fit">
-                    <a class="btn btn-primary w-full md:w-fit" href={routes.login()}>Login</a>
+                    <a class="btn btn-primary w-full md:w-fit md:justify-center justify-end" href={routes.login()}>
+                        Login
+                    </a>
                 </li>
             </ul>
         {/if}
@@ -194,10 +203,10 @@
     @reference "../ktor-svelte/app.css";
 
     .nav-link {
-        @apply bg-clip-text bg-base-content text-transparent w-full md:w-fit;
+        @apply md:bg-clip-text md:bg-base-content md:text-transparent w-full md:w-fit border md:border-none border-base-300 rounded-box pr-2 py-2;
     }
 
     .nav-link:hover {
-        @apply from-info to-base-content bg-linear-to-bl;
+        @apply md:from-info md:to-base-content md:bg-linear-to-bl;
     }
 </style>
