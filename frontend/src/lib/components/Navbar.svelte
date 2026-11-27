@@ -6,25 +6,24 @@
     import GitHubIcon from '#lib/custom-icons/GitHubIcon.svelte';
 
     const MIN_WIDTH = 6;
-    const MIN_HEIGHT = 96;
+    const MIN_HEIGHT = 6;
     const MAX_WIDTH = 64;
+    const MAX_HEIGHT = 15;
     const HIDING_THRESHOLD = 30;
-    const ANIMATION_HEIGHT_DELAY = 0.5;
-    const ANIMATION_WIDTH_DELAY= 8;
-
+    const ANIMATION_HEIGHT_DELAY = 10;
+    const ANIMATION_WIDTH_DELAY = 8;
     const TAILWIND_SIZE_MD = 768;
 
     let navBar: HTMLDivElement | null = $state(null)
-    let maxNavHeight: number | null = $state(null)
-    let navHeight = $state(maxNavHeight)
+    let navHeight = $state(MIN_HEIGHT)
     let pageWidth = $state(0);
     let isMobile = $derived(pageWidth <= TAILWIND_SIZE_MD);
     let navWidth = $state(MAX_WIDTH);
-    let navStyles = $derived(('width: ' + navWidth + 'rem; ') + (maxNavHeight ? 'height: ' + navHeight + 'px;' : ""));
+    let navStyles = $derived(('width: ' + navWidth + 'rem; height: ' + navHeight + 'rem;'));
     let oldScrollY = $state(0);
     let isOpen = $state(true);
     let isChanging = $state(false);
-    let isWidthShrinked = $state(false);
+    let isWidthCollapsed = $state(false);
 
     function updateScroll() {
         let newScrollY = window.scrollY;
@@ -40,26 +39,28 @@
     }
 
     function iconPressed() {
-        if (!isOpen) {
+        if (!isOpen && isWidthCollapsed && isMobile) {
+            open(true);
+        } else if (!isOpen && isWidthCollapsed) {
             open();
-        } else if (isMobile) {
+        } else if (isMobile && isOpen) {
             close();
-        } else {
+        } else if (isOpen) {
             goto(routes.home());
         }
     }
 
-    function open() {
+    function open(withHeight: boolean = false) {
         if (isChanging) return;
         isChanging = true;
         isOpen = true;
         expandWidth()
-        expandHeight()
+        if (withHeight) expandHeight()
         isChanging = false;
     }
 
     async function expandWidth() {
-        isWidthShrinked = false;
+        isWidthCollapsed = false;
         while (navWidth < MAX_WIDTH && isOpen) {
             await sleep(ANIMATION_WIDTH_DELAY);
             navWidth++;
@@ -67,8 +68,7 @@
     }
 
     async function expandHeight() {
-        if (!isMobile) return
-        while (navHeight < maxNavHeight && isOpen) {
+        while (navHeight < MAX_HEIGHT && isOpen) {
             await sleep(ANIMATION_HEIGHT_DELAY);
             navHeight++;
         }
@@ -78,13 +78,12 @@
         if (isChanging) return;
         isChanging = true;
         isOpen = false;
-        shrinkHeight()
         shrinkWidth()
+        shrinkHeight()
         isChanging = false;
     }
 
     async function shrinkHeight() {
-        if (!isMobile) return
         while (navHeight > MIN_HEIGHT && !isOpen) {
             await sleep(ANIMATION_HEIGHT_DELAY);
             navHeight--;
@@ -92,37 +91,49 @@
     }
 
     async function shrinkWidth() {
-        isWidthShrinked = false;
+        isWidthCollapsed = false;
 
         while (navWidth > MIN_WIDTH && !isOpen) {
             await sleep(ANIMATION_WIDTH_DELAY);
             navWidth--;
         }
-        isWidthShrinked = true;
+        isWidthCollapsed = true;
     }
 
     async function sleep(ms: number): Promise<void> {
         return new Promise((resolve) => setTimeout(resolve, ms));
     }
 
+    async function onResize() {
+        let windowSize = window.outerWidth
+        let mobile = windowSize <= TAILWIND_SIZE_MD
+        if (mobile) {
+            open(true)
+            initMobileSizes()
+        } else {
+            open()
+        }
+    }
+
+    function initMobileSizes() {
+        setTimeout(() => {
+            close();
+        }, 300);
+    }
+
     afterNavigate(() => {
         if (isMobile) {
-            maxNavHeight = navBar!!.getBoundingClientRect().height
-            navHeight = maxNavHeight
-            setTimeout(() => {
-                close();
-            }, 300);
+            initMobileSizes()
         }
     });
 
     $effect(() => {
-        if (navHeight > maxNavHeight) {
-            maxNavHeight = navHeight
-        }
+        if (navWidth < MIN_WIDTH) navWidth = MIN_WIDTH
+        if (navHeight < MIN_HEIGHT) navHeight = MIN_HEIGHT
     })
 </script>
 
-<svelte:window on:scroll={updateScroll} bind:outerWidth={pageWidth}/>
+<svelte:window on:resize={onResize} on:scroll={updateScroll} bind:outerWidth={pageWidth}/>
 <nav
     class="fixed md:top-4 md:left-0 right-0 md:bottom-auto bottom-12 w-full z-100 px-4 flex justify-end md:justify-center"
 >
@@ -132,7 +143,7 @@
         style={navStyles}
     >
         <div class="w-full md:w-fit flex flex-row p-0 m-0">
-            {#if isMobile && !isWidthShrinked}
+            {#if isMobile && !isWidthCollapsed}
                 <div class="flex md:hidden w-full"></div>
             {/if}
             <button
