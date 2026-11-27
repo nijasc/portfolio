@@ -16,6 +16,7 @@
     <br>
     <a href="https://github.com/nijasc/portfolio/commits"><img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/nijasc/portfolio?style=for-the-badge"></a>
     <a href="https://github.com/nijasc/portfolio/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/nijasc/portfolio?style=for-the-badge"></a>
+    <a href="https://github.com/nijasc/portfolio/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/v/release/nijasc/portfolio?style=for-the-badge"></a>
     <a href="https://github.com/nijasc/portfolio"><img alt="GitHub license" src="https://img.shields.io/github/license/nijasc/portfolio?style=for-the-badge"></a>
 </div>
 
