@@ -1,6 +1,5 @@
 <script lang="ts">
     import Icon from '#icon';
-    import { icons } from '#lib/ktor-svelte/icons.ts';
     import { m } from '#i18n';
     import { project } from '#lib';
 </script>
