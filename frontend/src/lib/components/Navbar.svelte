@@ -175,6 +175,7 @@
                     !mounted && 'max-md:hidden'
                 ]}
             >
+                <li class="nav-link md:hidden"><a href={routes.home()}>{m.home()}</a></li>
                 <li class="nav-link"><a href={routes.blog()}>{m.blog()}</a></li>
                 <li class="nav-link"><a href={routes.projects()}>{m.projects()}</a></li>
                 <li class="nav-link"><a href={routes.discussion()}>{m.discussion()}</a></li>

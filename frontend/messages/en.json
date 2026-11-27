@@ -2,5 +2,6 @@
   "blog": "Blog",
   "projects": "Projects",
   "discussion": "Discussion",
-  "login": "Login"
+  "login": "Login",
+  "home": "Home"
 }
