@@ -5,6 +5,7 @@
     import { cubicOut } from 'svelte/easing';
     import { links } from '#lib';
     import GitHubIcon from '#lib/custom-icons/GitHubIcon.svelte';
+    import {m} from "#i18n";
 
     const MIN_WIDTH = 6;
     const MIN_HEIGHT = 6;
@@ -153,7 +154,7 @@
                         <a target="_blank" class="btn md:hidden btn-neutral w-fit" href={links.githubRepo}>
                             <GitHubIcon />
                         </a>
-                        <span class="text-base-content/50 text-sm w-full text-center">Nijasc &copy; 2026</span>
+                        <span class="text-base-content/50 text-sm w-full text-center">Nijasc &copy; {new Date().getFullYear()}</span>
                     {/if}
                 </div>
             {/if}
@@ -174,9 +175,9 @@
                     !mounted && 'max-md:hidden'
                 ]}
             >
-                <li class="nav-link"><a href={routes.blog()}>Blog</a></li>
-                <li class="nav-link"><a href={routes.projects()}>Projects</a></li>
-                <li class="nav-link"><a href={routes.discussion()}>Discussion</a></li>
+                <li class="nav-link"><a href={routes.blog()}>{m.blog()}</a></li>
+                <li class="nav-link"><a href={routes.projects()}>{m.projects()}</a></li>
+                <li class="nav-link"><a href={routes.discussion()}>{m.discussion()}</a></li>
             </ul>
             <ul
                 class={[
@@ -191,7 +192,7 @@
                 </li>
                 <li class="w-full md:w-fit">
                     <a class="btn btn-primary w-full md:w-fit md:justify-center justify-end" href={routes.login()}>
-                        Login
+                        {m.login()}
                     </a>
                 </li>
             </ul>

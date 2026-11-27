@@ -1,3 +1,6 @@
 {
-  "welcome": "Welcome to your app ({language})"
+  "blog": "Blog",
+  "projects": "Projekte",
+  "discussion": "Diskusion",
+  "login": "Anmelden"
 }
