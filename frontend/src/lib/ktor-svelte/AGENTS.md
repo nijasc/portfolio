@@ -45,7 +45,7 @@ In Kotlin, redirects use the generated `FrontendRoutes` object. After adding, mo
 
 ## Libraries that are set up
 
-- Styling is Tailwind with DaisyUI. Themes are `winter`, `dracula`, set in Gradle. Switch with `setTheme` from `#theme`. Use DaisyUI classes and theme colors, not fixed colors.
+- Styling is Tailwind with DaisyUI. Themes are `winter`, `forest`, set in Gradle. Switch with `setTheme` from `#theme`. Use DaisyUI classes and theme colors, not fixed colors.
 - Icons: `import Icon from '#icon'`, then `<Icon name="Rocket" />`. Names are type checked. After using a new icon, run `./gradlew svelteSync`.
 - Texts: add the key to every file in `messages/` (`en.json`, `de.json`), run `./gradlew svelteSync`, then use `m.key()` from `#i18n`. Do not put user-visible text into components directly.
 

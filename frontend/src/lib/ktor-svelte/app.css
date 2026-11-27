@@ -3,7 +3,7 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 @plugin 'daisyui' {
-    themes: winter, dracula;
+    themes: winter, forest;
 }
 @plugin 'daisyui/theme' {
     name: 'shadcn-light';
