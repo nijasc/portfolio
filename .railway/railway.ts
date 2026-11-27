@@ -9,7 +9,10 @@ export default defineRailway(() => {
         healthcheck: '/_ktor-svelte/health',
         healthcheckTimeout: 60,
         env: {
-            DATABASE_URL: db.env.DATABASE_URL,
+            DATABASE_URL: `jdbc:postgresql://${db.env.PGHOST}:${db.env.PGPORT}/${db.env.PGDATABASE}`,
+            POSTGRES_USER: db.env.PGUSER,
+            POSTGRES_DB: db.env.PGDATABASE,
+            POSTGRES_PASSWORD: db.env.PGPASSWORD,
             SESSION_SECRET: preserve(),
             COOKIE_SECURE: 'true',
         },
