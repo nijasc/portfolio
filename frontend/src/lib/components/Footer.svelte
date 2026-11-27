@@ -18,7 +18,7 @@
 <footer class="w-full p-4 pb-12 md:pb-8 flex justify-center">
     <div class="w-full md:w-7xl bg-base-200 rounded-box h-fit flex flex-col shadow-lg shadow-base-300">
         <div class="bg-primary font-bold text-primary-content select-none p-4 rounded-t-box">
-            <span class="font-mono text-[6rem] md:text-[12rem]">{project.name}</span>
+            <span class="font-mono text-[6rem] md:text-[12rem]">{project.name}.</span>
         </div>
         <div class="flex flex-col md:flex-row justify-between space-y-8 md:space-y-0 px-8 py-4">
             <div class="flex flex-col space-y-2 text-base-content/70">
