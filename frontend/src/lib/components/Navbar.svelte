@@ -9,7 +9,7 @@
 
     const MIN_WIDTH = 6;
     const MIN_HEIGHT = 6;
-    const MAX_HEIGHT = 18.25;
+    const MAX_HEIGHT = 21.5;
     const MAX_WIDTH_MOBILE = 22;
     const MAX_WIDTH_DESKTOP = 64;
     const ANIMATION_DURATION = 300;
@@ -171,7 +171,7 @@
         {#if navWidth > hidingThreshold}
             <ul
                 class={[
-                    'flex flex-col space-y-2 mt-2 md:mt-0 md:space-y-0 md:flex-row md:space-x-8 w-full md:w-fit text-right',
+                    'flex flex-col-reverse space-y-2 mt-2 md:mt-0 md:space-y-0 md:flex-row md:space-x-8 w-full md:w-fit text-right',
                     !mounted && 'max-md:hidden'
                 ]}
             >
