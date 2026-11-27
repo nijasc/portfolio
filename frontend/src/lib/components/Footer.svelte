@@ -2,7 +2,7 @@
     import { getLocale, locales, m, setLocale } from '#i18n';
     import { project } from '#lib';
     import Icon from '#icon';
-    import {icons, type LucideIconName} from '#lib/ktor-svelte/icons.ts';
+    import { icons, type LucideIconName } from '#lib/ktor-svelte/icons.ts';
     import { getTheme, setTheme, themes } from '#theme';
     import { routes } from '#routes';
 
