@@ -1,1 +1,1 @@
-export { links } from '#lib/links.ts';
+export * from '#lib/const.ts';

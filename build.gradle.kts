@@ -51,7 +51,9 @@ svelte {
             themes(DaisyTheme.ShadcnLight)
             defaultTheme(DaisyTheme.ShadcnLight)
         }
-        lucide()
+        lucide {
+            allIcons()
+        }
         i18n {
             locales("en", "de")
             defaultLocale = "en"

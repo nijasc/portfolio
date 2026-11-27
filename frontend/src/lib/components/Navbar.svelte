@@ -3,9 +3,9 @@
     import { routes } from '#routes';
     import { afterNavigate, goto } from '$app/navigation';
     import { cubicOut } from 'svelte/easing';
-    import { links } from '#lib';
     import GitHubIcon from '#lib/custom-icons/GitHubIcon.svelte';
-    import {m} from "#i18n";
+    import { m } from '#i18n';
+    import { links } from '#lib';
 
     const MIN_WIDTH = 6;
     const MIN_HEIGHT = 6;
@@ -154,7 +154,9 @@
                         <a target="_blank" class="btn md:hidden btn-neutral w-fit" href={links.githubRepo}>
                             <GitHubIcon />
                         </a>
-                        <span class="text-base-content/50 text-sm w-full text-center">Nijasc &copy; {new Date().getFullYear()}</span>
+                        <span class="text-base-content/50 text-sm w-full text-center">
+                            Nijasc &copy; {new Date().getFullYear()}
+                        </span>
                     {/if}
                 </div>
             {/if}
