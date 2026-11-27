@@ -3,6 +3,6 @@
   "private": true,
   "type": "module",
   "devDependencies": {
-    "railway": "3.18.0"
+    "railway": "^3.19.0"
   }
 }
