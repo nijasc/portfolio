@@ -4,5 +4,10 @@
   "discussion": "Diskusion",
   "login": "Anmelden",
   "home": "Startseite",
-  "contact": "Kontakt"
+  "contact": "Kontakt",
+  "pages": "Seiten",
+  "resources": "Ressourcen",
+  "privacyPolicy": "Privatsphäre",
+  "termsOfService": "AGB",
+  "manageCookies": "Cookies verwalten"
 }

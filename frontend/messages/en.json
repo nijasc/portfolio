@@ -4,5 +4,10 @@
   "discussion": "Discussion",
   "login": "Login",
   "home": "Home",
-  "contact": "Contact"
+  "contact": "Contact",
+  "pages": "Pages",
+  "resources": "Resources",
+  "privacyPolicy": "Privacy policy",
+  "termsOfService": "Terms of service",
+  "manageCookies": "Manage cookies"
 }
