@@ -42,6 +42,8 @@ tasks.shadowJar {
 svelte {
     dev {
         openBrowser = false
+        https = true
+        httpsPort = 8081
     }
     libraries {
         tailwind {
